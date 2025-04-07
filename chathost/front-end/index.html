@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat P2P Estilo Messenger</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css"> </head>
+<body class="bg-gray-100">
+    <div id="chat-container" class="flex">
+        <aside id="sidebar" class="bg-gray-100 w-64 border-r border-gray-200 p-4 flex flex-col">
+            <div id="sidebar-header" class="border-b border-gray-200 pb-4 mb-4">
+                <h2 class="text-lg font-semibold">Usuarios Conectados</h2>
+            </div>
+            <div id="user-list" class="overflow-y-auto flex-1">
+                </div>
+             <div id="logout-button" class="mt-4">
+                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Cerrar sesión
+                </button>
+            </div>
+        </aside>
+        <main class="flex-1 flex flex-col">
+            <header id="chat-header" class="bg-blue-500 text-white p-4 text-center border-b border-blue-700">
+                <h1 class="text-xl font-semibold">Chat P2P</h1>
+            </header>
+            <section id="chat-messages" class="flex-1 overflow-y-auto p-4 flex flex-col">
+                </section>
+            <section id="message-input-area" class="bg-gray-100 p-4 border-t border-gray-200 flex items-center">
+                <select id="recipient-select" class="mr-2 rounded-md border border-gray-300 p-2">
+                    <option value="all">Todos</option>
+                    </select>
+                <button class="emoji-button mr-2" id="emoji-button">😊</button>
+                <div id="emoji-picker" class="hidden">
+                    </div>
+                <input type="text" id="message-input" placeholder="Escribe tu mensaje..." class="flex-1 rounded-full border border-gray-300 p-3">
+                <button id="send-button" class="bg-blue-500 hover:bg-blue-700 text-white rounded-full px-6 py-2">
+                    <span>Enviar</span>
+                </button>
+                 <input type="file" id="image-input" accept="image/*">
+                <label for="image-input" id="upload-image-button" class="ml-2">
+                    <i class="fas fa-upload"></i>
+                </label>
+            </section>
+        </main>
+    </div>
+
+    <div id="login-register-form" class="hidden">
+        <h2>Registro/Inicio de Sesión</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" id="username" name="username" required>
+                <p id="username-error" class="error-message"></p>
+            </div>
+            <div class="input-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+                <p id="password-error" class="error-message"></p>
+            </div>
+            <button type="submit">Iniciar Sesión/Registrarse</button>
+        </form>
+    </div>
+
+    <div id="terms-of-service" class="message-box hidden">
+        <h2>Términos de Servicio y Acuerdos de Uso</h2>
+        <div id="terms-of-service-content">
+            <p>
+                <strong>1. Aceptación de los Términos</strong>
+            </p>
+            <p>
+                Al acceder y utilizar esta aplicación de chat P2P, usted acepta
+                quedar sujeto a estos Términos de Servicio y Acuerdos de Uso ("Términos").
+                Si no está de acuerdo con todos los términos y condiciones, no acceda ni
+                utilice la Aplicación.
+            </p>
+            <p>
+                <strong>2. Descripción del Servicio</strong>
+            </p>
+            <p>
+                La Aplicación es una plataforma de chat P2P diseñada para facilitar la
+                comunicación directa entre usuarios.  La Aplicación puede utilizar
+                tecnología para permitir a los usuarios conectarse y comunicarse
+                directamente entre sí.
+            </p>
+            <p>
+                <strong>3. Uso Aceptable</strong>
+            </p>
+            <p>
+                Usted acepta utilizar la Aplicación sólo para fines lícitos y de una manera
+                que no infrinja los derechos de terceros ni restrinja o inhiba el uso y
+                disfrute de la Aplicación por parte de terceros.
+            </p>
+            <p>
+                <strong>4. Contenido del Usuario</strong>
+            </p>
+            <p>
+                Usted es el único responsable del contenido de los mensajes que transmita
+                a través de la Aplicación. Usted declara y garantiza que tiene todos los
+                derechos necesarios para transmitir dicho contenido y que dicho contenido
+                no infringe los derechos de terceros.
+            </p>
+            <p>
+                <strong>5. Privacidad</strong>
+            </p>
+            <p>
+                El uso de la Aplicación también está sujeto a nuestra Política de
+                Privacidad, que se incorpora a estos Términos por referencia. Su privacidad
+                es importante para nosotros.
+            </p>
+            <p>
+                <strong>6. Terminación</strong>
+            </p>
+            <p>
+                Podemos terminar o suspender su acceso a la Aplicación inmediatamente,
+                sin previo aviso o responsabilidad, por cualquier razón, incluyendo sin
+                limitación si usted incumple los Términos.
+            </p>
+            <p>
+                <strong>7. Descargo de Responsabilidad</strong>
+            </p>
+            <p>
+                La Aplicación se proporciona "tal cual" y "según disponibilidad" sin
+                garantía de ningún tipo, ya sea expresa o implícita.
+            </p>
+            <p>
+                <strong>8. Limitación de Responsabilidad</strong>
+            </p>
+            <p>
+                En la máxima medida permitida por la ley aplicable, en ningún caso seremos
+                responsables por daños indirectos, incidentales, especiales, consecuenciales
+                o punitivos, incluyendo, sin limitación, pérdida de beneficios, datos, uso,
+                buena voluntad u otras pérdidas intangibles, que resulten de (i) su acceso o
+                uso o la imposibilidad de acceder o usar la Aplicación; (ii) cualquier
+                conducta o contenido de terceros en la Aplicación.
+            </p>
+            <p>
+                <strong>9. Cambios a los Términos</strong>
+            </p>
+            <p>
+                Nos reservamos el derecho de modificar o reemplazar estos Términos en
+                cualquier momento.
+            </p>
+            <p>
+                <strong>10. Miscelánea</strong>
+            </p>
+            <p>
+                Estos Términos constituyen el acuerdo completo entre nosotros con respecto
+                a nuestro Servicio, y reemplazan cualquier acuerdo anterior que podamos
+                haber tenido entre nosotros.
+            </p>
+        </div>
+        <button id="terms-of-service-accept">Aceptar y Continuar</button>
+    </div>
+
+    <script src="script.js"></script> </body>
+</html>
